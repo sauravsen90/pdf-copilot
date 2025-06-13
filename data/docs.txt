@@ -1,0 +1,4 @@
+Python is a high-level programming language.
+FastAPI is a modern web framework for building APIs with Python.
+RAG stands for Retrieval-Augmented Generation.
+Google Gemini is a generative AI model by Google.
