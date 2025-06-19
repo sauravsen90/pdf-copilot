@@ -1,0 +1,27 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*.so
+
+# Credentials and secrets
+credentials/
+
+# Virtual environment folders
+venv/
+.env/
+.env.bak/
+env/
+ENV/
+
+# VSCode or other editor configs (optional)
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+'=2.0'/
