@@ -12,6 +12,7 @@ venv/
 .env.bak/
 env/
 ENV/
+.env
 
 # VSCode or other editor configs (optional)
 .vscode/
@@ -24,4 +25,4 @@ Thumbs.db
 # Logs
 *.log
 
-'=2.0'/
+=2.0
