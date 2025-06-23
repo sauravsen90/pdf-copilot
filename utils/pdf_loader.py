@@ -9,7 +9,7 @@ def extract_pdf_chunks(path_to_pdf: str) -> List[Dict]:
     chunks=[]
 
     with pdfplumber.open(path_to_pdf) as pdf:
-        for i in enumerate(pdf.pages):
+        for i,page in enumerate(pdf.pages):
             page_number = i+1
 
             # Extract plain text
@@ -29,14 +29,12 @@ def extract_pdf_chunks(path_to_pdf: str) -> List[Dict]:
             tables = page.extract_tables()
             for table in tables:
                 if table:
-                    table_text = format_as_table_text(table)
-                    chunks.append(
-                        {
-                            "type: "table"
-                            "content": table_text,
-                            "page": page_number
-                        }
-                    )
+                    table_text = format_table_as_text(table)
+                    chunks.append({
+                        "type": "table",
+                        "content": table_text,
+                        "page": page_number
+                    })
 
     return chunks
 
@@ -46,4 +44,10 @@ def format_table_as_text(table: List[List[str]]) -> str:
     You could later improve this with markdown or CSV output.
     """
     formatted_rows = []
-    col_widths = [max()for col in zip(*table)]    
+    col_widths = [max(len(str(cell or '')) for cell in col) for col in zip(*table)]    
+
+    for row in table:
+        padded = [str(cell or '').ljust(width) for cell, width in zip(row, col_widths)]
+        formatted_rows.append(" | ".join(padded))
+
+    return "\n".join(formatted_rows)

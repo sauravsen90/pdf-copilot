@@ -3,9 +3,11 @@ import google.generativeai as genai
 import chromadb
 from chromadb.utils import embedding_functions
 from templates.rag_prompt import format_rag_prompt
+from utils.chroma_client import get_chroma_client
 
 
-chroma_client = chromadb.Client()
+# chroma_client = chromadb.Client()
+chroma_client = get_chroma_client()
 collection = chroma_client.get_or_create_collection("documents")
 
 def embed_texts(texts):

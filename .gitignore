@@ -18,6 +18,7 @@ ENV/
 # VSCode or other editor configs (optional)
 .vscode/
 .idea/
+chroma_store/
 
 # OS files
 .DS_Store
