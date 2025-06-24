@@ -1,13 +1,18 @@
-import chromadb
-from chromadb.config import Settings
-
-_chroma_client = None
+from chromadb import PersistentClient
+import os
 
 def get_chroma_client():
-    global _chroma_client
-    if _chroma_client is None:
-        _chroma_client = chromadb.Client(Settings(
-            persist_directory="chroma_store",
-            anonymized_telemetry=False
-        ))
-    return _chroma_client
+    persist_dir = "chroma_store"
+
+    if os.path.exists(persist_dir):
+        print(f"[DEBUG] Chroma persist directory already exists: {persist_dir}")
+    else:
+        print(f"[DEBUG] Creating Chroma persist directory: {persist_dir}")
+
+    chroma_client = PersistentClient(path=persist_dir)
+
+    print(f"[DEBUG] Chroma client created with persistence at: {persist_dir}")
+    print(f"[DEBUG] Chroma client type: {type(chroma_client)}")
+    print(f"[DEBUG] Client has 'persist' method: {hasattr(chroma_client, 'persist')}")
+
+    return chroma_client
